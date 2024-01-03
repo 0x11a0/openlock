@@ -23,8 +23,9 @@ const bcrypt = require('bcrypt');  // For hashing the passwords
 // 1. Register a new user
 exports.register = async (req, res) => {
     try {
-        // Create a new user instance with data from the request body
-        const user = new User(req.body);
+        const { role, ...userData } = req.body;
+
+        const user = new User({ ...userData, role: 'user' });
 
         // Save the new user to the database
         await user.save();
@@ -74,30 +75,6 @@ exports.logout = async (req, res) => {
 
         // Send a success response
         res.send({ message: 'Logged out successfully!' });
-    } catch (error) {
-        // Handle any errors during the process
-        res.status(500).send({ error: error.message });
-    }
-};
-
-// 5. Logout the user from all devices
-exports.logoutAll = async (req, res) => {
-    try {
-        // Before filtering the tokens array, check if it exists
-        if (req.user && req.user.tokens) {
-            req.user.tokens = req.user.tokens.filter(tokenDoc => tokenDoc.token !== req.token);
-        } else {
-            return res.status(500).send({ error: 'No tokens found for this user.' });
-        }
-
-        // Clear out all tokens, effectively logging the user out from all devices
-        req.user.tokens = [];
-
-        // Save the updated user to the database
-        await req.user.save();
-
-        // Send a success response
-        res.send({ message: 'Logged out from all devices successfully!' });
     } catch (error) {
         // Handle any errors during the process
         res.status(500).send({ error: error.message });

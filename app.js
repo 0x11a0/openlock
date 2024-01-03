@@ -17,6 +17,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const userRoutes = require('./routes/userRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 
 // Create an instance of Express
 const app = express();
@@ -31,6 +32,7 @@ app.use(bodyParser.json());
 
 // Use our routes with the Express application
 app.use('/api/users', userRoutes);  // Here '/api' is a base endpoint. Adjust as needed.
+app.use('/api/admin', adminRoutes);  // Here '/api' is a base endpoint. Adjust as needed.
 
 // Error handling middleware
 
