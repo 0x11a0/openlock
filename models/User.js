@@ -40,6 +40,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true   // Password is also mandatory
     },
+    role: {
+        type: String,
+        enum: ['user', 'admin'],
+        default: 'user'
+    },
     tokens: [{
         token: {
             type: String,
@@ -49,7 +54,7 @@ const userSchema = new mongoose.Schema({
 });
 
 // Mongoose "pre" middleware: this code runs before a User document is saved
-userSchema.pre('save', async function(next) {
+userSchema.pre('save', async function (next) {
     const user = this;  // Get the current user
 
     // Check if the password field was modified (or is new)
@@ -62,14 +67,14 @@ userSchema.pre('save', async function(next) {
 });
 
 // Method to generate a JWT for the user
-userSchema.methods.generateAuthToken = async function() {
+userSchema.methods.generateAuthToken = async function () {
     const user = this;
     // Create a JWT, using the user's ID as payload and signing with the secret from .env
     // The token will expire as specified in .env (e.g., "7 days")
-    const token = jwt.sign({_id: user._id.toString()}, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRY });
+    const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRY });
 
     // Store the generated token in the tokens array of the user
-    user.tokens = user.tokens.concat({token});
+    user.tokens = user.tokens.concat({ token });
     await user.save();  // Save the user document with the new token
 
     return token;
