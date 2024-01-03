@@ -1,7 +1,5 @@
 # openlock
 
-# express_starter
-
 ### Express App - User Authentication
 
 This Express application provides a robust user authentication system, utilizing JWTs (JSON Web Tokens) for secure access and session management. From registration to login, and even features like logging out of individual or all sessions, this app is a complete authentication solution.
@@ -18,8 +16,8 @@ This Express application provides a robust user authentication system, utilizing
 1. **Clone the repository**:
 
     ```bash
-    git clone https://github.com/lucasodra/express_starter
-    cd express_starter
+    git clone https://github.com/lucasodra/openlock
+    cd openlock
     ```
 
 2. **Install dependencies**:
