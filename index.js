@@ -22,10 +22,10 @@ mongoose.connect(process.env.MONGO_URI, {
     console.log('Connected to MongoDB successfully.');
 
     // Start the Express server
-    const PORT = 3000;
-    app.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}.`);
-    });
+    // const PORT = 3000;
+    // app.listen(PORT, () => {
+    //     console.log(`Server is running on port ${PORT}.`);
+    // });
 }).catch(error => {
     console.error('Error connecting to MongoDB:', error);
 });

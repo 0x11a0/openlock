@@ -17,8 +17,37 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const routes = require('./expressRoute');  // Assuming your routes file is named expressRoute.js
 
+// WebSocket connection handling
+const http = require('http');
+const WebSocket = require('ws');
+
 // Create an instance of Express
 const app = express();
+const server = http.createServer(app);
+
+// Create WebSocket server
+const wss = new WebSocket.Server({ noServer: true});
+
+wss.on('connection', (ws) => {
+    console.log('ESP connected');
+
+    ws.on('message', (message) => {
+        console.log('Received message from ESP: ${message}');
+        // Handle message from ESP
+    })
+
+    ws.send('Test ESP');
+});
+
+server.on('upgrade', (request, socket, head) => {
+    wss.handleUpgrade(request, socket, head, (ws) => {
+        wss.emit('connection', ws, request);
+    });
+});
+
+server.listen(3000, () => {
+    console.log('Server listening on port 3000');
+});
 
 // Middleware setup
 
