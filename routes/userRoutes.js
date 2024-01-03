@@ -16,8 +16,8 @@
 
 
 const express = require('express'); // Import Express
-const userController = require('./expressController'); // Import our user controller
-const auth = require('./middleware/auth'); // Import our authentication middleware
+const userController = require('../controllers/userController'); // Import our user controller
+const auth = require('../middleware/auth'); // Import our authentication middleware
 
 const router = express.Router(); // Create a new Express router
 

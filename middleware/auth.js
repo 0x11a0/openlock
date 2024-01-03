@@ -15,40 +15,38 @@
  * This acts as a gatekeeper, ensuring that only authenticated requests can interact with protected endpoints.
  */
 
-
 // Import the 'jsonwebtoken' library for handling JSON Web Tokens
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 // Middleware to check if the user is authenticated
 exports.isAuthenticated = async (req, res, next) => {
-    
-    // Get the 'authorization' header from the incoming request
-    const authHeader = req.headers.authorization;
+    try {
+        // Get the 'authorization' header from the incoming request
+        const authHeader = req.headers.authorization;
+        const token = authHeader && authHeader.split(' ')[1];
 
-    // Check if the authorization header exists. If it does, split it at the space 
-    // (typically it looks like "Bearer <TOKEN>"). Extract the token part.
-    const token = authHeader && authHeader.split(' ')[1];
-    
-    // If there's no token, it means the request doesn't have proper authentication details
-    if (!token) {
-        // Return a 401 (Unauthorized) status with a relevant message
-        return res.status(401).json({message: "unauthorized"});
+        if (!token) {
+            return res.status(401).json({ message: "Unauthorized: No token provided" });
+        }
+
+        // Verify the token
+        const decodedData = jwt.verify(token, process.env.JWT_SECRET);
+
+        // Find the user based on the ID from the token
+        const user = await User.findById(decodedData._id);
+
+        if (!user) {
+            return res.status(401).json({ message: "Unauthorized: User not found" });
+        }
+
+        // Attach the user and token to the request object
+        req.user = user;
+        req.token = token;
+
+        next();
+    } catch (error) {
+        // Handle errors, such as an invalid or expired token
+        res.status(401).json({ message: "Unauthorized: Invalid token" });
     }
-
-    // If there's a token, attempt to verify it using the JWT secret from environment variables
-    // If the verification is successful, decodedData will have the payload of the JWT.
-    // If it's not successful (e.g., if the token has been tampered with), 
-    // it will throw an error, which you'd ideally catch in a production setup.
-    const decodedData = jwt.verify(token, process.env.JWT_SECRET);
-
-    // Assign the decoded data to the request object as 'user'. 
-    // This means in future middleware or route handlers, you can access the authenticated user's details via req.user.
-    req.user = await User.findById(decodedData._id);
-
-    // Attach the token to the request object for subsequent middleware/controllers
-    req.token = token;
-
-    // Move to the next middleware or route handler
-    next();
 };

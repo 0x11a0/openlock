@@ -17,7 +17,7 @@
  */
 
 
-const User = require('./models/User');  // Import the User model
+const User = require('../models/User');  // Import the User model
 const bcrypt = require('bcrypt');  // For hashing the passwords
 
 // 1. Register a new user
