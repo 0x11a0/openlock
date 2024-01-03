@@ -15,7 +15,8 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const routes = require('./expressRoute');  // Assuming your routes file is named expressRoute.js
+
+const userRoutes = require('./routes/userRoutes');
 
 // Create an instance of Express
 const app = express();
@@ -29,7 +30,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Use our routes with the Express application
-app.use('/api/users', routes);  // Here '/api' is a base endpoint. Adjust as needed.
+app.use('/api/users', userRoutes);  // Here '/api' is a base endpoint. Adjust as needed.
 
 // Error handling middleware
 
