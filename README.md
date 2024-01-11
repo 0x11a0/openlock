@@ -1,8 +1,7 @@
 # openlock
 
-### Express App - User Authentication
+### Overview
 
-This Express application provides a robust user authentication system, utilizing JWTs (JSON Web Tokens) for secure access and session management. From registration to login, and even features like logging out of individual or all sessions, this app is a complete authentication solution.
 
 #### Table of Contents
 
@@ -32,6 +31,9 @@ This Express application provides a robust user authentication system, utilizing
 
     ```bash
     cp env.example .env
+    cd client_socket_test
+    cp env.example .env
+    cd ..
     ```
 
     Ensure you update `.env` with the required environment variables.
@@ -40,10 +42,15 @@ This Express application provides a robust user authentication system, utilizing
 4. **Start the server**:
 
     ```bash
-    npm run start
+    npm run dev
     ```
 
     By default, the server runs on `http://localhost:3000`.
+
+    ```bash
+    cd client_socket_test
+    node esp32Socket.js
+    ```
 
 #### API Usage
 
@@ -65,7 +72,7 @@ This Express application provides a robust user authentication system, utilizing
     }
     ```
 
-2. **Login an existing user**
+1. **Login an existing user**
 
     Endpoint: `/users/login`
 
@@ -80,7 +87,7 @@ This Express application provides a robust user authentication system, utilizing
     }
     ```
 
-3. **Get profile of authenticated user**
+1. **Get profile of authenticated user**
 
     Endpoint: `/users/me`
     
@@ -94,7 +101,7 @@ This Express application provides a robust user authentication system, utilizing
     }
     ```
 
-4. **Logout user from current device**
+1. **Logout user from current device**
 
     Endpoint: `/users/logout`
     
@@ -108,9 +115,9 @@ This Express application provides a robust user authentication system, utilizing
     }
     ```
 
-5. **Logout user from all devices**
+1. **Logout user from all devices**
 
-    Endpoint: `/users/logoutAll`
+    Endpoint: `/admin/logoutAll`
     
     Method: `POST`
 
@@ -122,41 +129,36 @@ This Express application provides a robust user authentication system, utilizing
     }
     ```
 
-#### Directory Structure
+    Remarks: This can be only if you are an admin
 
-Here's an overview of the main directories and files:
+1. **Create new admin**
 
-```
-.
-├── LICENSE
-├── README.md
-├── app.js                # Main application entry point
-├── env.example           # Example environment file
-├── expressController.js  # Controller functions for routes
-├── expressRoute.js       # Route definitions
-├── generate.key.js       # Key generator utility
-├── index.js              # Server initialization
-├── middleware/
-│   └── auth.js           # Authentication middleware
-├── models/
-│   └── User.js           # User Mongoose model
-└── test/
-    └── user.test.js      # User-related tests using Axios
-```
+    Endpoint: `/admin/logoutAll`
+    
+    Method: `POST`
 
-#### Testing
+    ```json
+    {
+        "username": "<username>",
+        "email": "<email>",
+        "password": "<password>",
+        "role": "admin"
+    }
+    ```
 
-To test user-related functionalities, use the `user.test.js` script. This script, built with Axios, tests the following:
-1. Registering a new user.
-2. Logging in an existing user.
-3. Retrieving the authenticated user's profile.
-4. Logging out the user from the current device.
-5. Logging out the user from all devices.
+    Remarks: If you are holding onto the admin role, you can create another admin.
 
-To run the test:
+1. **Unlock ESP32**
 
-```bash
-node test/user.test.js
-```
+    Endpoint: `/esp32/unlock`
+    
+    Method: `POST`
 
----
+    ```json
+    {
+        "esp32Code": "<code>",
+        "instruction": "open"
+    }
+    ```
+
+    Remarks: The code in the body has to match the ESP32_CODE on the esp32 server.

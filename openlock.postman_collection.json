@@ -23,7 +23,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"angry3\",\n    \"email\": \"angruiyan3@gmail.com\",\n    \"password\": \"{{PASSWORD}}\",\n    \"role\": \"admin\"\n}",
+					"raw": "{\n    \"username\": \"angry3\",\n    \"email\": \"angruiyan3@gmail.com\",\n    \"password\": \"{{PASSWORD}}\",\n    \"role\": \"user\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -142,46 +142,6 @@
 			"response": []
 		},
 		{
-			"name": "Create admin",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTk1MzljNzZjNDgzMTgyN2VlYjVkOGIiLCJpYXQiOjE3MDQyNzg0ODQsImV4cCI6MTcwNDg4MzI4NH0.FkqHc35E-9QFLX9KZKZuWfnVOji9FZSN9WekPOcPJjE",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"username\": \"angry4\",\n    \"email\": \"angruiyan4@gmail.com\",\n    \"password\": \"{{PASSWORD}}\",\n    \"role\": \"admin\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/api/admin/register",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"admin",
-						"register"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Logout all users",
 			"request": {
 				"auth": {
@@ -213,13 +173,53 @@
 			"response": []
 		},
 		{
+			"name": "Create Admin",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTk1MzljNzZjNDgzMTgyN2VlYjVkOGIiLCJpYXQiOjE3MDQyNzg0ODQsImV4cCI6MTcwNDg4MzI4NH0.FkqHc35E-9QFLX9KZKZuWfnVOji9FZSN9WekPOcPJjE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"angry3\",\n    \"email\": \"angruiyan3@gmail.com\",\n    \"password\": \"{{PASSWORD}}\",\n    \"role\": \"user\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/admin/logoutAll",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"admin",
+						"logoutAll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "MVP unlock",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    'esp32Code': 'A12',\n    \n}",
+					"raw": "{\n    \"esp32Code\": \"A12\",\n    \"instruction\": \"open\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
