@@ -1,4 +1,5 @@
 const WebSocket = require('ws');
+require('dotenv').config();
 
 const wss = new WebSocket.Server({ port: 8080 });
 
@@ -17,8 +18,7 @@ wss.on('connection', (ws) => {
                 console.log('Received JSON data:');
                 console.log(data);
 
-                // Perform your logic based on the JSON data
-                if (data.instruction === 'open') {
+                if (isCorrectESP32(data.esp32Code) && data.instruction === 'open') {
                     // Implement code to handle 'open' instruction
                     console.log('Opening...');
                     ws.send('opened');
@@ -35,3 +35,13 @@ wss.on('connection', (ws) => {
         console.log('WebSocket client disconnected');
     });
 });
+
+
+const isCorrectESP32 = (inputESP32Code) => {
+    const currentESP32 = process.env.ESP32_CODE
+
+    if (currentESP32 === inputESP32Code) {
+        return true
+    }
+    return false
+}
