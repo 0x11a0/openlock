@@ -19,6 +19,7 @@ const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const esp32Routes = require('./routes/esp32Routes');
+const sessionRoutes = require('./routes/sessionRoutes');
 
 // Create an instance of Express
 const app = express();
@@ -32,9 +33,10 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Use our routes with the Express application
-app.use('/api/users', userRoutes);  // Here '/api' is a base endpoint. Adjust as needed.
-app.use('/api/admin', adminRoutes);  // Here '/api' is a base endpoint. Adjust as needed.
-app.use('/api/esp32', esp32Routes);  // Here '/api' is a base endpoint. Adjust as needed.
+app.use('/api/users', userRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/esp32', esp32Routes);
+app.use('/api/sessions', sessionRoutes);
 
 // Error handling middleware
 

@@ -102,6 +102,12 @@ userSchema.statics.findByCredentials = async (email, password) => {
     return user;
 };
 
+userSchema.virtual('sessions', {
+    ref: 'Session',
+    localField: '_id',
+    foreignField: 'user'
+});
+
 // Create a Mongoose model based on the schema, and export it
 const User = mongoose.model('User', userSchema);
 module.exports = User;

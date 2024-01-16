@@ -17,6 +17,7 @@
 
 const express = require('express'); // Import Express
 const userController = require('../controllers/userController'); // Import our user controller
+const sessionController = require('../controllers/sessionController'); // Import our user controller
 const auth = require('../middleware/auth'); // Import our authentication middleware
 
 const router = express.Router(); // Create a new Express router
@@ -40,6 +41,9 @@ router.get('/me', auth.isAuthenticated, userController.getProfile);
 // POST /users/logout
 // The 'auth.isAuthenticated' middleware ensures that only authenticated users can log out
 router.post('/logout', auth.isAuthenticated, userController.logout);
+
+router.get('/sessions', auth.isAuthenticated, sessionController.getSessions);
+router.post('/sessions/register', auth.isAuthenticated, sessionController.register);
 
 // Export the router to be used in the main app.js or server.js file
 module.exports = router;
