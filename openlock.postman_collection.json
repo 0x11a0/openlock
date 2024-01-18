@@ -1,246 +1,204 @@
 {
-	"info": {
-		"_postman_id": "44d4a21c-6e7e-4363-9c0a-d91ee12a0fcc",
-		"name": "openlock",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "3592566"
-	},
-	"item": [
-		{
-			"name": "Register",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTk1MzljNzZjNDgzMTgyN2VlYjVkOGIiLCJpYXQiOjE3MDQyNzg0ODQsImV4cCI6MTcwNDg4MzI4NH0.FkqHc35E-9QFLX9KZKZuWfnVOji9FZSN9WekPOcPJjE",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"username\": \"angry3\",\n    \"email\": \"angruiyan3@gmail.com\",\n    \"password\": \"{{PASSWORD}}\",\n    \"role\": \"user\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/api/users/register",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"users",
-						"register"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Login",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"email\": \"angruiyan@gmail.com\",\n    \"password\": \"{{PASSWORD}}\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/api/users/login",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"users",
-						"login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Logout",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTk1MzA2YjExMDljYTQyY2Q0NzY2NDMiLCJpYXQiOjE3MDQyNzYwNzksImV4cCI6MTcwNDg4MDg3OX0.Y8TbpRWnabv8ce4hLvkXAfADBGh9CRznsXB4OrVyt1g",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/api/users/logout",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"users",
-						"logout"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get user profile",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTk1MzA2YjExMDljYTQyY2Q0NzY2NDMiLCJpYXQiOjE3MDQyNzYwNzksImV4cCI6MTcwNDg4MDg3OX0.Y8TbpRWnabv8ce4hLvkXAfADBGh9CRznsXB4OrVyt1g",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/api/users/me",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"users",
-						"me"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Logout all users",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTk1MzljNzZjNDgzMTgyN2VlYjVkOGIiLCJpYXQiOjE3MDQyNzg0ODQsImV4cCI6MTcwNDg4MzI4NH0.FkqHc35E-9QFLX9KZKZuWfnVOji9FZSN9WekPOcPJjE",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/api/admin/logoutAll",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"admin",
-						"logoutAll"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create Admin",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTk1MzljNzZjNDgzMTgyN2VlYjVkOGIiLCJpYXQiOjE3MDQyNzg0ODQsImV4cCI6MTcwNDg4MzI4NH0.FkqHc35E-9QFLX9KZKZuWfnVOji9FZSN9WekPOcPJjE",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"username\": \"angry3\",\n    \"email\": \"angruiyan3@gmail.com\",\n    \"password\": \"{{PASSWORD}}\",\n    \"role\": \"user\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/api/admin/logoutAll",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"admin",
-						"logoutAll"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "MVP unlock",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"esp32Code\": \"A12\",\n    \"instruction\": \"open\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/api/esp32/unlock",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"esp32",
-						"unlock"
-					]
-				}
-			},
-			"response": []
-		}
-	]
+  "info": {
+    "_postman_id": "44d4a21c-6e7e-4363-9c0a-d91ee12a0fcc",
+    "name": "openlock",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "3592566"
+  },
+  "item": [
+    {
+      "name": "Register",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTk1MzljNzZjNDgzMTgyN2VlYjVkOGIiLCJpYXQiOjE3MDQyNzg0ODQsImV4cCI6MTcwNDg4MzI4NH0.FkqHc35E-9QFLX9KZKZuWfnVOji9FZSN9WekPOcPJjE",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\": \"angry3\",\n    \"email\": \"angruiyan3@gmail.com\",\n    \"password\": \"{{PASSWORD}}\",\n    \"role\": \"user\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/users/register",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "users", "register"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\": \"angruiyan@gmail.com\",\n    \"password\": \"{{PASSWORD}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/users/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "users", "login"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Logout",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTk1MzA2YjExMDljYTQyY2Q0NzY2NDMiLCJpYXQiOjE3MDQyNzYwNzksImV4cCI6MTcwNDg4MDg3OX0.Y8TbpRWnabv8ce4hLvkXAfADBGh9CRznsXB4OrVyt1g",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/users/logout",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "users", "logout"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get user profile",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTk1MzA2YjExMDljYTQyY2Q0NzY2NDMiLCJpYXQiOjE3MDQyNzYwNzksImV4cCI6MTcwNDg4MDg3OX0.Y8TbpRWnabv8ce4hLvkXAfADBGh9CRznsXB4OrVyt1g",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/users/me",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "users", "me"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Logout all users",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTk1MzljNzZjNDgzMTgyN2VlYjVkOGIiLCJpYXQiOjE3MDQyNzg0ODQsImV4cCI6MTcwNDg4MzI4NH0.FkqHc35E-9QFLX9KZKZuWfnVOji9FZSN9WekPOcPJjE",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/admin/logoutAll",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "admin", "logoutAll"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Admin",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTk1MzljNzZjNDgzMTgyN2VlYjVkOGIiLCJpYXQiOjE3MDQyNzg0ODQsImV4cCI6MTcwNDg4MzI4NH0.FkqHc35E-9QFLX9KZKZuWfnVOji9FZSN9WekPOcPJjE",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\": \"angry3\",\n    \"email\": \"angruiyan3@gmail.com\",\n    \"password\": \"{{PASSWORD}}\",\n    \"role\": \"user\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/admin/logoutAll",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "admin", "logoutAll"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "MVP unlock",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"esp32Code\": \"A12\",\n    \"instruction\": \"open\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/esp32/unlock",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "esp32", "unlock"]
+        }
+      },
+      "response": []
+    }
+  ]
 }
