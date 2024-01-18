@@ -14,6 +14,8 @@
 // Import required modules
 const express = require("express");
 const cors = require("cors");
+require("dotenv").config();
+
 const bodyParser = require("body-parser");
 
 const esp32Routes = require("./routes/esp32Routes");
@@ -29,8 +31,6 @@ app.use(bodyParser.json());
 
 // Use our routes with the Express application
 app.use("/api/esp32", esp32Routes);
-
-// Error handling middleware
 
 // 404 Not Found Middleware
 app.use((req, res, next) => {
