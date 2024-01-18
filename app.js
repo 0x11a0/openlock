@@ -1,16 +1,3 @@
-/**
- * app.js
- *
- * This file sets up and configures the Express application. Specifically, it:
- * 1. Imports required libraries and middleware.
- * 2. Sets up the Express instance and middleware used for body parsing, logging, etc.
- * 3. Imports and configures the application's routes.
- * 4. Handles errors and provides appropriate responses.
- *
- * By separating these configurations into `app.js`, it allows for a modular structure where server setup
- * (in `index.js`) is distinct from application configuration, making the codebase easier to maintain and scale.
- */
-
 // Import required modules
 const express = require("express");
 const cors = require("cors");
