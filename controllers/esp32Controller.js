@@ -11,7 +11,6 @@ exports.unlock = (req, res) => {
         console.log("unlock message from server");
         console.log(jsonString);
 
-        client.send("unlock message from server");
         client.send(jsonString);
       }
     });
