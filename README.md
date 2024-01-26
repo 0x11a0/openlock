@@ -32,7 +32,7 @@
 1. **To update the docker image**
 
    ```bash
-   docker build -t my-node-app:latest .
+   docker build -t my-node-app:latest . --platform linux/amd64
    ```
 
 **To push to docker hub**
