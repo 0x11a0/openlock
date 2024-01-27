@@ -23,4 +23,4 @@ jobs:
       - uses: actions/checkout@v2
       - run: |
           cd ./nginx
-          docker build -t nginx
+          docker build -t nginx .
