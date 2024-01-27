@@ -4,6 +4,8 @@ services:
   app:
     image: thelucasliao/openlock-staging-app:latest
     container_name: app
+    env_file:
+      - .env
     hostname: app
     ports:
       - "3000:3000"
