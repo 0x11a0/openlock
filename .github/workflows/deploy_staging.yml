@@ -1,4 +1,4 @@
-name: Build and Push Docker Images for Staging to DockerHub
+name: CI - Build and Push Docker Images for Staging to DockerHub
 
 on:
   push:
@@ -34,4 +34,4 @@ jobs:
           context: ./${{ matrix.servers }}
           platforms: linux/amd64
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/openlock-${{ matrix.servers }}:${{ github.ref_name }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/openlock-staging-${{ matrix.servers }}:${{ github.ref_name }}
