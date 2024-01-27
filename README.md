@@ -10,6 +10,16 @@
 
 #### Docker
 
+Docker compose in the root directory
+
+```bash
+docker compose up
+```
+
+NGINX proxies from 8080
+
+##### Nodejs server only
+
 1. **Build the docker image**
 
    ```bash
@@ -90,3 +100,15 @@ https://docs.docker.com/get-started/04_sharing_app/
    ```
 
    Remarks: The code in the body has to match the ESP32_CODE on the esp32 server.
+
+#### Test SSL/TLS
+
+This is if the SSL is up.
+```bash
+curl --insecure https://localhost/health
+```
+
+This is if the SSL is not up
+```bash
+curl --insecure http://localhost/health
+```
