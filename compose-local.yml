@@ -1,9 +1,9 @@
 version: "3"
 
 services:
-  nodejs:
-    container_name: nodejs
-    hostname: nodejs
+  app:
+    container_name: app
+    hostname: app
     build:
       context: ./app
       dockerfile: Dockerfile
@@ -23,7 +23,7 @@ services:
     ports:
       - "80:80"
     depends_on:
-      - nodejs
+      - app
     networks:
       - app-networks
 
