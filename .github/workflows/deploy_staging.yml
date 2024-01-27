@@ -32,6 +32,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./${{ matrix.servers }}
-          platforms: linux/amd64
+          platforms: linux/amd64,linux/arm64/v8
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/openlock-staging-${{ matrix.servers }}:${{ github.ref_name }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/openlock-staging-${{ matrix.servers }}:latest
