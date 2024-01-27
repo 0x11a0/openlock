@@ -104,11 +104,13 @@ https://docs.docker.com/get-started/04_sharing_app/
 #### Test SSL/TLS
 
 This is if the SSL is up.
+
 ```bash
 curl --insecure https://localhost/health
 ```
 
 This is if the SSL is not up
+
 ```bash
 curl --insecure http://localhost/health
 ```
