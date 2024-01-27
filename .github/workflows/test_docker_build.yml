@@ -6,15 +6,15 @@ on:
       - dev
 
 jobs:
-  build-nodejs:
-    name: Build Nodejs Docker Image
+  build-app:
+    name: Build App Docker Image
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
       - run: |
           cd ./app
-          docker build -t nodejs .
+          docker build -t app .
 
   build-nginx:
     name: Build Nginx Docker Image
