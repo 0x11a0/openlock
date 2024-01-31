@@ -19,6 +19,7 @@ app.use(bodyParser.json());
 
 // Use our routes with the Express application
 app.use("/api/esp32", esp32Routes);
+
 app.use("/", healthRoutes);
 
 // 404 Not Found Middleware
