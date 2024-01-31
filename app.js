@@ -6,7 +6,6 @@ require("dotenv").config();
 const bodyParser = require("body-parser");
 
 const esp32Routes = require("./routes/esp32Routes");
-const healthRoutes = require("./routes/healthRoutes");
 
 // Create an instance of Express
 const app = express();
@@ -19,8 +18,6 @@ app.use(bodyParser.json());
 
 // Use our routes with the Express application
 app.use("/api/esp32", esp32Routes);
-
-app.use("/", healthRoutes);
 
 // 404 Not Found Middleware
 app.use((req, res, next) => {

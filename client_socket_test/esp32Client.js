@@ -1,7 +1,7 @@
 const WebSocket = require("ws");
 
 // Replace with the appropriate WebSocket server URL
-const wsUrl = "ws://localhost:3000"; // or the port you are using for your WebSocket server
+const wsUrl = "ws://192.168.131.75:3000"; // or the port you are using for your WebSocket server
 const ws = new WebSocket(wsUrl);
 
 ws.on("open", function open() {
