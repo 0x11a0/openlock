@@ -4,8 +4,49 @@
 
 #### Table of Contents
 
+1. [Docker](#docker)
 1. [Installation and Setup](#installation-and-setup)
-2. [API Usage](#api-usage)
+1. [API Usage](#api-usage)
+
+#### Docker
+
+Docker compose in the root directory
+
+```bash
+docker compose up
+```
+
+NGINX proxies from 8080
+
+##### Nodejs server only
+
+1. **Build the docker image**
+
+   ```bash
+   docker build -t my-node-app .
+   ```
+
+1. **Run the docker container**
+
+   ```bash
+   docker run -p 3000:3000 -d my-node-app
+   ```
+
+1. **To see docker logs**
+
+   ```bash
+   docker ps
+   docker logs -f -t [container_id_or_name]
+   ```
+
+1. **To update the docker image**
+
+   ```bash
+   docker build -t my-node-app:latest . --platform linux/amd64
+   ```
+
+**To push to docker hub**
+https://docs.docker.com/get-started/04_sharing_app/
 
 #### Installation and Setup
 
