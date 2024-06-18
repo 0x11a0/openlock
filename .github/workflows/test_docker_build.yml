@@ -1,0 +1,27 @@
+name: Test docker build
+
+on:
+  pull_request:
+    branches:
+      - dev
+
+jobs:
+  build-app:
+    name: Build App Docker Image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: |
+          cd ./app
+          docker build -t app .
+
+  build-nginx:
+    name: Build Nginx Docker Image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: |
+          cd ./nginx
+          docker build -t nginx .

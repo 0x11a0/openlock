@@ -1,164 +1,116 @@
 # openlock
 
-# express_starter
-
-### Express App - User Authentication
-
-This Express application provides a robust user authentication system, utilizing JWTs (JSON Web Tokens) for secure access and session management. From registration to login, and even features like logging out of individual or all sessions, this app is a complete authentication solution.
+### Overview
 
 #### Table of Contents
 
+1. [Docker](#docker)
 1. [Installation and Setup](#installation-and-setup)
-2. [API Usage](#api-usage)
-3. [Directory Structure](#directory-structure)
-4. [Testing](#testing)
+1. [API Usage](#api-usage)
+
+#### Docker
+
+Docker compose in the root directory
+
+```bash
+docker compose up
+```
+
+NGINX proxies from 8080
+
+##### Nodejs server only
+
+1. **Build the docker image**
+
+   ```bash
+   docker build -t my-node-app .
+   ```
+
+1. **Run the docker container**
+
+   ```bash
+   docker run -p 3000:3000 -d my-node-app
+   ```
+
+1. **To see docker logs**
+
+   ```bash
+   docker ps
+   docker logs -f -t [container_id_or_name]
+   ```
+
+1. **To update the docker image**
+
+   ```bash
+   docker build -t my-node-app:latest . --platform linux/amd64
+   ```
+
+**To push to docker hub**
+https://docs.docker.com/get-started/04_sharing_app/
 
 #### Installation and Setup
 
 1. **Clone the repository**:
 
-    ```bash
-    git clone https://github.com/lucasodra/express_starter
-    cd express_starter
-    ```
+   ```bash
+   git clone https://github.com/lucasodra/openlock
+   cd openlock
+   ```
 
-2. **Install dependencies**:
+1. **Install dependencies**:
 
-    ```bash
-    npm install
-    ```
+   ```bash
+   npm install
+   ```
 
-3. **Set up your environment**:
+1. **Set up your environment**:
 
-    Copy `env.example` to a new file named `.env`:
+   Copy `env.example` to a new file named `.env`:
 
-    ```bash
-    cp env.example .env
-    ```
+   ```bash
+   cp env.example .env
+   ```
 
-    Ensure you update `.env` with the required environment variables.
-    Ensure you have MongoDB installed and running locally.
+   Ensure you update `.env` with the required environment variables.
 
-4. **Start the server**:
+1. **Start the server**:
 
-    ```bash
-    npm test
-    ```
+   ```bash
+   npm run dev
+   ```
 
-    By default, the server runs on `http://localhost:3000`.
+   By default, the HTTP and WebSocket server runs on `http://localhost:3000`.
 
 #### API Usage
 
 **Base URL**: `http://localhost:3000/api`
 
-1. **Register a new user**
+1. **Unlock ESP32**
 
-    Endpoint: `/users/register`
-    
-    Method: `POST`
-    
-    Body:
+   Endpoint: `/esp32/unlock`
 
-    ```json
-    {
-        "username": "<username>",
-        "email": "<email>",
-        "password": "<password>"
-    }
-    ```
+   Method: `POST`
 
-2. **Login an existing user**
+   ```json
+   {
+     "esp32Code": "<code>",
+     "password": "<password>",
+     "instruction": "open"
+   }
+   ```
 
-    Endpoint: `/users/login`
+   Remarks: The code in the body has to match the ESP32_CODE on the esp32 server.
 
-    Method: `POST`
+#### Test SSL/TLS
 
-    Body:
-
-    ```json
-    {
-        "email": "<email>",
-        "password": "<password>"
-    }
-    ```
-
-3. **Get profile of authenticated user**
-
-    Endpoint: `/users/me`
-    
-    Method: `GET`
-
-    Headers:
-
-    ```json
-    {
-        "Authorization": "Bearer <Your-Token>"
-    }
-    ```
-
-4. **Logout user from current device**
-
-    Endpoint: `/users/logout`
-    
-    Method: `POST`
-
-    Headers:
-
-    ```json
-    {
-        "Authorization": "Bearer <Your-Token>"
-    }
-    ```
-
-5. **Logout user from all devices**
-
-    Endpoint: `/users/logoutAll`
-    
-    Method: `POST`
-
-    Headers:
-
-    ```json
-    {
-        "Authorization": "Bearer <Your-Token>"
-    }
-    ```
-
-#### Directory Structure
-
-Here's an overview of the main directories and files:
-
-```
-.
-├── LICENSE
-├── README.md
-├── app.js                # Main application entry point
-├── env.example           # Example environment file
-├── expressController.js  # Controller functions for routes
-├── expressRoute.js       # Route definitions
-├── generate.key.js       # Key generator utility
-├── index.js              # Server initialization
-├── middleware/
-│   └── auth.js           # Authentication middleware
-├── models/
-│   └── User.js           # User Mongoose model
-└── test/
-    └── user.test.js      # User-related tests using Axios
-```
-
-#### Testing
-
-To test user-related functionalities, use the `user.test.js` script. This script, built with Axios, tests the following:
-1. Registering a new user.
-2. Logging in an existing user.
-3. Retrieving the authenticated user's profile.
-4. Logging out the user from the current device.
-5. Logging out the user from all devices.
-
-To run the test:
+This is if the SSL is up.
 
 ```bash
-node test/user.test.js
+curl --insecure https://localhost/health
 ```
 
----
+This is if the SSL is not up
+
+```bash
+curl --insecure http://localhost/health
+```
