@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node app/index.js",
     "dev": "nodemon index.js",
-    "test": "mocha tests/*.test.js"
+    "test": "mocha 'app/tests/**/*.test.js' --experimental-specifier-resolution=node",
+    "lint": "eslint .",
+    "prettier": "prettier --write ."
   },
   "repository": {
     "type": "git",
@@ -31,6 +33,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.5.2",
     "nodemon": "^3.0.1",
+    "redis": "^4.7.0",
     "supertest": "^6.3.3",
     "websocket": "^1.0.34",
     "ws": "^8.16.0"

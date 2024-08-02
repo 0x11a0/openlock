@@ -1,20 +1,22 @@
-// Import required modules
-const app = require("./app");
-const http = require("http");
-const wss = require("./websocketServer"); // Import WebSocket server
-require("dotenv").config();
+// index.js
+const express = require('express');
+const app = express();
+const config = require('./config');
+const errorMiddleware = require('./middleware/errorMiddleware');
+const authRoutes = require('./routes/authRoutes');
+const deviceRoutes = require('./routes/deviceRoutes');
+const commandRoutes = require('./routes/commandRoutes');
+const { forwardCommand, getStatus } = require('./services/commandService');
 
-const server = http.createServer(app);
+app.use(express.json());
+app.use('/api/auth', authRoutes);
+app.use('/api/device', deviceRoutes);
+app.use('/api/command', commandRoutes);
 
-// Attach WebSocket server to the same HTTP server
-server.on("upgrade", (request, socket, head) => {
-  wss.handleUpgrade(request, socket, head, (ws) => {
-    wss.emit("connection", ws, request);
-  });
+app.use(errorMiddleware);
+
+const server = app.listen(config.port, () => {
+  console.log(`Server running on port ${config.port}`);
 });
 
-// Start the Express server
-const PORT = process.env.PORT;
-server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
-});
+module.exports = server;
