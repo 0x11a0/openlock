@@ -1,21 +1,19 @@
-// websocketServer.js
 const WebSocket = require("ws");
 const WebSocketServer = WebSocket.Server;
 
+// Create a WebSocket server with no server attachment initially
 const wss = new WebSocketServer({ noServer: true });
 
-const messageRateLimit = 5; // Max number of messages per interval
-const rateLimitInterval = 10000; // Interval in ms (10 seconds in this case)
-const userMessageCount = new Map();
+const messageRateLimit = 5; // Maximum number of messages per interval
+const rateLimitInterval = 10000; // Interval in ms (10 seconds)
+const userMessageCount = new Map(); // Track message counts for each client
 
-wss.on("connection", function connection(ws, req) {
+wss.on("connection", (ws, req) => {
   const clientIp = req.socket.remoteAddress;
   userMessageCount.set(ws, 0);
 
   console.log(`WebSocket client connected: ${clientIp}`);
   console.log(`Total connected clients: ${wss.clients.size}`);
-
-  console.log("WebSocket client connected");
 
   ws.on("error", (error) => {
     console.error("WebSocket error:", error);
@@ -23,11 +21,7 @@ wss.on("connection", function connection(ws, req) {
 
   ws.on("close", (code, reason) => {
     userMessageCount.delete(ws);
-
-    console.log(
-      `WebSocket client ${clientIp} disconnected with code ${code} and reason ${reason}`
-    );
-
+    console.log(`WebSocket client ${clientIp} disconnected with code ${code} and reason ${reason}`);
     console.log(`Total connected clients: ${wss.clients.size}`);
   });
 
@@ -36,9 +30,7 @@ wss.on("connection", function connection(ws, req) {
     messageCount++;
 
     if (messageCount > messageRateLimit) {
-      console.warn(
-        `Client ${clientIp} exceeded message rate limit. Disconnecting.`
-      );
+      console.warn(`Client ${clientIp} exceeded message rate limit. Disconnecting.`);
       ws.terminate();
       return;
     }
@@ -46,12 +38,16 @@ wss.on("connection", function connection(ws, req) {
     userMessageCount.set(ws, messageCount);
 
     try {
-      console.log(message.toString());
+      const parsedMessage = JSON.parse(message);
+      console.log("Received message:", parsedMessage);
+      // Handle the received message here, depending on your application logic
     } catch (error) {
       console.error("Error parsing JSON:", error);
+      ws.send(JSON.stringify({ error: "Invalid JSON format" }));
+      return;
     }
-    console.log("Received message:", message.toString());
-    ws.send("Message received");
+
+    ws.send(JSON.stringify({ message: "Message received" }));
 
     // Reset message count after the interval
     setTimeout(() => {
@@ -59,7 +55,7 @@ wss.on("connection", function connection(ws, req) {
     }, rateLimitInterval);
   });
 
-  ws.send("Welcome to the WebSocket server!");
+  ws.send(JSON.stringify({ message: "Welcome to the WebSocket server!" }));
 });
 
 module.exports = wss;
